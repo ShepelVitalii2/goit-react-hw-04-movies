@@ -1,11 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { NavLink, Route, useParams, useRouteMatch } from 'react-router-dom';
 import * as moviesAPI from '../services/moviesDB-api';
 import Status from '../components/Status';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
-import ActorsInfoView from './ActorsInfoView';
-import Review from './Review';
+
+const ActorsInfoView = lazy(() =>
+  import('./ActorsInfoView' /* webpacChunkName: ActorsInfo-view*/),
+);
+const Review = lazy(() =>
+  import('./ActorsInfoView' /* webpacChunkName: Review-view-view-view*/),
+);
 
 export default function FullInfoView() {
   const { movieId } = useParams();
@@ -59,14 +64,15 @@ export default function FullInfoView() {
               <NavLink to={`${url}/reviews`}>Reviews</NavLink>
             </li>
           </ul>
+          <Suspense fallback={<Loader />}>
+            <Route path={`${path}/cast`}>
+              {status === Status.RESOLVED && <ActorsInfoView />}
+            </Route>
 
-          <Route path={`${path}/cast`}>
-            {status === Status.RESOLVED && <ActorsInfoView />}
-          </Route>
-
-          <Route path={`${path}/reviews`}>
-            {status === Status.RESOLVED && <Review />}
-          </Route>
+            <Route path={`${path}/reviews`}>
+              {status === Status.RESOLVED && <Review />}
+            </Route>
+          </Suspense>
         </>
       )}
     </main>

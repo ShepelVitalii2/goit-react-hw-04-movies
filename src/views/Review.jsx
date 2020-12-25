@@ -12,7 +12,6 @@ export default function Review() {
   const [status, setStatus] = useState(Status.IDLE);
 
   useEffect(() => {
-    // setStatus(Status.PENDING);
     moviesAPI
       .fetchMoviesReview(movieId)
       .then(({ results }) => {

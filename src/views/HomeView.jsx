@@ -7,8 +7,6 @@ import ErrorMessage from '../components/ErrorMessage';
 import Loader from '../components/Loader';
 
 export default function HomeView() {
-  // const { url } = useRouteMatch('');
-  // const [query, setQuery] = useState('');
   const [movies, setMovies] = useState(null);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(Status.IDLE);
@@ -31,7 +29,7 @@ export default function HomeView() {
     <main>
       <h1 className={s.header}>Trenidng today</h1>
       {status === Status.PENDING && <Loader />}
-      {status === Status.REJECTED && <ErrorMessage message={error.message} />}
+      {status === Status.REJECTED && <ErrorMessage message={error} />}
       {status === Status.RESOLVED && (
         <ul>
           {movies.map(movies => (

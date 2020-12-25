@@ -1,6 +1,5 @@
 import s from './Views.module.css';
 import { useState, useEffect } from 'react';
-// import { useParams } from 'react-router-dom';
 import { Link, useRouteMatch } from 'react-router-dom';
 import * as moviesAPI from '../services/moviesDB-api';
 import SearchBar from 'components/SearchBar';
@@ -9,7 +8,6 @@ import ErrorMessage from '../components/ErrorMessage';
 import Loader from '../components/Loader';
 
 export default function MoviesView() {
-  //   const { moviesId } = useParams();
   const { url } = useRouteMatch();
   const [query, setQuery] = useState('');
   const [movie, setMovies] = useState(null);

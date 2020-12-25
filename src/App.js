@@ -1,32 +1,38 @@
+import { lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import AppBar from './components/AppBar/AppBar';
-import Container from './components/Container/Container';
-import Home from 'views/HomeView';
-import Movies from './views/MoviesVeiw';
-import FullInfo from './views/FullInfoView';
-import { ToastContainer } from 'react-toastify';
-// import NotFound from 'views/NotFoundView';
-// import SearchBar from './components/SearchBar/SearchBar';
+import AppBar from './components/AppBar';
+import Container from './components/Container';
+import Loader from './components/Loader';
+
+const Home = lazy(() =>
+  import('./views/HomeView' /*webpackChunkName: "Home-view" */),
+);
+const Movies = lazy(() =>
+  import('./views/MoviesVeiw' /*webpackChunkName: "Movies-view" */),
+);
+const FullInfo = lazy(() =>
+  import('./views/FullInfoView' /*webpackChunkName: "FullInfoMovie-view" */),
+);
 
 export default function App() {
   return (
     <Container>
       <AppBar />
+      <Suspense fallback={<Loader />}>
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
 
-      <Switch>
-        <Route path="/" exact>
-          <Home />
-        </Route>
+          <Route path="/movies" exact>
+            <Movies />
+          </Route>
 
-        <Route path="/movies" exact>
-          <Movies />
-        </Route>
-
-        <Route path="/movies/:movieId">
-          <FullInfo />
-        </Route>
-        <ToastContainer autoClose={3700} />
-      </Switch>
+          <Route path="/movies/:movieId">
+            <FullInfo />
+          </Route>
+        </Switch>
+      </Suspense>
     </Container>
   );
 }
