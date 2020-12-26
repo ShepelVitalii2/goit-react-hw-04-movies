@@ -1,5 +1,7 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { NavLink, Route, useParams, useRouteMatch } from 'react-router-dom';
+import s from './Views.module.css';
+
 import * as moviesAPI from '../services/moviesDB-api';
 import Status from '../components/Status';
 import Loader from '../components/Loader';
@@ -9,7 +11,7 @@ const ActorsInfoView = lazy(() =>
   import('./ActorsInfoView' /* webpacChunkName: ActorsInfo-view*/),
 );
 const Review = lazy(() =>
-  import('./ActorsInfoView' /* webpacChunkName: Review-view-view-view*/),
+  import('./Review' /* webpacChunkName: Review-view-view-view*/),
 );
 
 export default function FullInfoView() {
@@ -45,17 +47,23 @@ export default function FullInfoView() {
       {status === Status.REJCECTED && <ErrorMessage message={error} />}
       {status === Status.RESOLVED && (
         <>
-          <img src={movie.src} alt={movie.title} />
-          <h2>{movie.title}</h2>
-          <p>User Score: {movie.score} %</p>
-          <h3>Overview</h3>
-          <p>{movie.overview}</p>
-          <h3>Genres</h3>
-          <ul>
-            {movie.genres.map(genre => (
-              <li key={genre.id}>{genre.name}</li>
-            ))}
-          </ul>
+          <img
+            src={movie.src}
+            alt={movie.title}
+            className={s.fullInfoMovieImg}
+          />
+          <div className={s.infoWrapper}>
+            <h2>{movie.title}</h2>
+            <p>User Score: {movie.score} %</p>
+            <h3>Overview</h3>
+            <p>{movie.overview}</p>
+            <h3>Genres</h3>
+            <ul>
+              {movie.genres.map(genre => (
+                <li key={genre.id}>{genre.name}</li>
+              ))}
+            </ul>
+          </div>
           <ul>
             <li>
               <NavLink to={`${url}/cast`}>Cast</NavLink>

@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import AppBar from './components/AppBar';
 import Container from './components/Container';
 import Loader from './components/Loader';
@@ -33,6 +34,7 @@ export default function App() {
           </Route>
         </Switch>
       </Suspense>
+      <ToastContainer autoClose={2000} />
     </Container>
   );
 }

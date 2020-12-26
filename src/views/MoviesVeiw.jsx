@@ -53,7 +53,7 @@ export default function MoviesView() {
       {status === Status.RESOLVED && (
         <>
           <h2 className={s.header}>Movies</h2>
-          <ul>
+          <ul className={s.moviesItem}>
             {movie.map(movie => (
               <li key={movie.id}>
                 <Link to={`${url}/${movie.id}`}>{movie.title}</Link>

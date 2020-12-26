@@ -1,3 +1,44 @@
 .header {
   text-align: center;
 }
+
+.infoWrapper {
+  padding: 20px;
+  border-bottom: 1px solid #2a363b;
+}
+
+.fullInfoMovieImg {
+  margin: 50px auto 0px auto;
+  width: 300px;
+  height: auto;
+}
+
+.actorsInfoList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: -10px;
+  text-align: center;
+  list-style: none;
+}
+
+.actorsInfoItem {
+  margin: 10px;
+  width: 400px;
+  padding: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #e8eaee;
+  transition: 0.25s;
+}
+
+.item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 2px 4px rgba(49, 83, 236, 0.548);
+}
+
+.actorsInfoImg {
+  width: 400px;
+  height: auto;
+}

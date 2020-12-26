@@ -4,6 +4,8 @@ import * as moviesAPI from '../services/moviesDB-api';
 import Status from '../components/Status';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Review() {
   const { movieId } = useParams();
@@ -15,6 +17,9 @@ export default function Review() {
     moviesAPI
       .fetchMoviesReview(movieId)
       .then(({ results }) => {
+        if (results.length === 0) {
+          toast.error('we dont have information about this movie yet');
+        }
         setReviews(results);
         setStatus(Status.RESOLVED);
       })
@@ -30,10 +35,10 @@ export default function Review() {
       {status === Status.REJECTED && <ErrorMessage message={error} />}
       {status === Status.RESOLVED && (
         <ul>
-          {reviews.map(reviews => (
-            <li key={reviews.id}>
-              <h4>Author: {reviews.author}</h4>
-              <p>{reviews.content}</p>
+          {reviews.map(review => (
+            <li key={review.id}>
+              <h4>Author: {review.author}</h4>
+              <p>{review.content}</p>
             </li>
           ))}
         </ul>
