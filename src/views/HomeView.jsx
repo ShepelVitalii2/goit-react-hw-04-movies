@@ -31,10 +31,16 @@ export default function HomeView() {
       {status === Status.PENDING && <Loader />}
       {status === Status.REJECTED && <ErrorMessage message={error} />}
       {status === Status.RESOLVED && (
-        <ul>
+        <ul className={s.moviesList}>
           {movies.map(movies => (
-            <li key={movies.id}>
-              <Link to={`movies/${movies.id}`}>{movies.title}</Link>
+            <li key={movies.id} className={s.moviesItem}>
+              <Link to={`movies/${movies.id}`}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
+                  alt={movies.title}
+                  className={s.fullInfoMovieImg}
+                />
+              </Link>
             </li>
           ))}
         </ul>
